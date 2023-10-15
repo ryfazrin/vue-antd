@@ -1,5 +1,12 @@
 <script setup lang="ts">
+// Vue
+import { h } from 'vue';
+
+// antd
 import { Button, type ButtonProps } from 'ant-design-vue'
+import { DownloadOutlined, FilterOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons-vue';
+
+// Colors
 import { COLORS, type ColorType } from '@/styles/color.ts'
 
 type CustomButtonProps = {
@@ -34,12 +41,12 @@ const theme = {
 		? 'outline-button' : '',
 	icon: ['add', 'download', 'filter', 'search'].includes(props.typeButton) ?
 		props.typeButton === 'add'
-			? 'Plus Icon'
+			? h(PlusOutlined)
 			: props.typeButton === 'filter'
-			? 'filter Icon'
+			? h(FilterOutlined)
 			: props.typeButton === 'search'
-			? 'Search Icon'
-			: 'Download Icon' : null,
+			? h(SearchOutlined)
+			: h(DownloadOutlined) : null,
   $outlineColor: props.outlineType ? COLORS[props.outlineType] : '',
 }
 </script>
@@ -120,7 +127,9 @@ const theme = {
 		v-bind="props"
 		:icon="theme.icon"
 		:class="[$attrs.class, theme.customClass]">
-		<!-- {{ $attrs.class }} | {{ theme.customClass }} -->
-    <slot />
+		{{ props.typeButton === 'filter' ? 'Filter' : '' }}
+		<template v-if="typeButton !== 'filter'">
+      <slot />
+    </template>
   </Button>
 </template>

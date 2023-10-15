@@ -5,8 +5,14 @@ import { Button } from 'ant-design-vue'
 </script>
 
 <template>
-  <Button>Test</Button>
-  <CustomButton>
-    Hai
+  <!-- <Button>Test</Button> -->
+  <p>Add</p>
+  <CustomButton typeButton="add">
+    Hai Test
+  </CustomButton>
+
+  <p>Filter</p>
+  <CustomButton typeButton="filter">
+    Hai Test
   </CustomButton>
 </template>
