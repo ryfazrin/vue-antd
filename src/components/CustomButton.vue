@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Button, type ButtonProps } from 'ant-design-vue'
-import { type ColorType } from '@/styles/color.ts'
+import { COLORS, type ColorType } from '@/styles/color.ts'
 
 type CustomButtonProps = {
   typeButton?:
@@ -19,26 +19,35 @@ type CustomButtonProps = {
 
 const props = withDefaults(
   defineProps<CustomButtonProps & ButtonProps>(),
+	// Props Default value
   {
     typeButton: 'primary',
     isStrong: true,
-    isInverted: false
+    isInverted: false,
   }
 );
 
 const theme = {
-  $typeButton: props.typeButton === 'danger'
-    ? '#DC3545'
-    : 'radial-gradient(76.32% 76.32% at 95.23% 6.02%, #9358AF 0%, #7E5AC6 54.71%, rgba(142, 80, 220, 0.00) 100%), linear-gradient(72deg, #9A57A7 0%, rgba(106, 103, 227, 0.00) 100%), radial-gradient(45.63% 45.63% at 35.11% -11.02%, #7936AE 0%, rgba(95, 34, 143, 0.00) 100%), radial-gradient(156.61% 80.36% at 94.32% 94.43%, rgba(123, 83, 184, 0.78) 0%, rgba(124, 92, 199, 0.78) 32.29%, rgba(145, 105, 208, 0.37) 64.06%, rgba(105, 43, 205, 0.00) 100%), linear-gradient(313deg, #9557AD 0%, #604AEA 100%)',
-  $isStrong: props.isStrong ? '700' : '400',
-  $outlineColor: props.outlineType ? props.isInverted  ? '#fff' : props.outlineType : '#fff',
+	customClass: props.typeButton === 'secondary' 
+		? 'secondary-button'
+		: ['filter', 'search', 'outline'].includes(props.typeButton)
+		? 'outline-button' : '',
+	icon: ['add', 'download', 'filter', 'search'].includes(props.typeButton) ?
+		props.typeButton === 'add'
+			? 'Plus Icon'
+			: props.typeButton === 'filter'
+			? 'filter Icon'
+			: props.typeButton === 'search'
+			? 'Search Icon'
+			: 'Download Icon' : null,
+  $outlineColor: props.outlineType ? COLORS[props.outlineType] : '',
 }
 </script>
 
-<style scoped lang="scss">
+<!-- <style scoped lang="scss">
 .ant-btn {
-  background: v-bind('theme.$typeButton');
-  font-weight: v-bind('theme.$isStrong');
+  background: v-bind('props.typeButton === `danger` ? `#DC3545` : `radial-gradient(76.32% 76.32% at 95.23% 6.02%, #9358AF 0%, #7E5AC6 54.71%, rgba(142, 80, 220, 0.00) 100%), linear-gradient(72deg, #9A57A7 0%, rgba(106, 103, 227, 0.00) 100%), radial-gradient(45.63% 45.63% at 35.11% -11.02%, #7936AE 0%, rgba(95, 34, 143, 0.00) 100%), radial-gradient(156.61% 80.36% at 94.32% 94.43%, rgba(123, 83, 184, 0.78) 0%, rgba(124, 92, 199, 0.78) 32.29%, rgba(145, 105, 208, 0.37) 64.06%, rgba(105, 43, 205, 0.00) 100%), linear-gradient(313deg, #9557AD 0%, #604AEA 100%)`');
+  font-weight: v-bind('props.isStrong ? `700` : `400`');
   position: relative;
   box-shadow: none;
   display: flex;
@@ -49,7 +58,7 @@ const theme = {
   line-height: 16px !important;
 
   &:hover {
-    background: v-bind('theme.$typeButton');
+    /* background: v-bind('theme.$typeButton'); */
   }
 
   &.secondary-button {
@@ -99,11 +108,19 @@ const theme = {
 			background-clip: text;
 		}
 	}
+
+	&.outline-button {
+		background: v-bind('props.outlineType ? props.isInverted ? `#fff` : props.outlineType : `#fff`');
+	}
 }
-</style>
+</style> -->
 
 <template>
-  <Button v-bind="props">
+  <Button
+		v-bind="props"
+		:icon="theme.icon"
+		:class="[$attrs.class, theme.customClass]">
+		<!-- {{ $attrs.class }} | {{ theme.customClass }} -->
     <slot />
   </Button>
 </template>
