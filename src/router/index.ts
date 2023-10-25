@@ -11,6 +11,11 @@ const router = createRouter({
       component: HomeView
     },
     {
+      path: '/antd-playground',
+      name: 'antd-playground',
+      component: () => import('../views/AntdView.vue')
+    },
+    {
       path: '/about',
       name: 'about',
       // route level code-splitting
