@@ -1,7 +1,10 @@
 <script lang="ts" setup>
 import type { SelectProps } from 'ant-design-vue';
-import { ref } from 'vue';
+import { watch, ref } from 'vue';
 import SelectComponent from '../components/SelectComponent.vue'
+import InputComponent from '../components/input/InputComponent.vue'
+import InputPasswordComponent from '../components/input/InputPasswordComponent.vue'
+import TextAreaComponent from '../components/input/TextAreaComponent.vue'
 import type { SelectValue } from 'ant-design-vue/es/select';
 
 const value1 = ref('lucy')
@@ -31,6 +34,11 @@ const focus = () => {
 const handleChange = (value: SelectValue) => {
   console.log(`selected ${value}`);
 }
+
+const value = ref<string>('')
+watch(value, () => {
+  console.log(value.value)
+})
 </script>
 
 <template>
@@ -41,8 +49,15 @@ const handleChange = (value: SelectValue) => {
       :options="options1"
       @change="handleChange"
       @focus="focus"
-      style="width: 120px"
+      style="
+        width: 120px;
+        height: 44px;
+      "
     ></SelectComponent>
+
+    <InputComponent v-model:value="value" placeholder="Basic usage" />
+    <InputPasswordComponent v-model:value="value" placeholder="Basic usage" />
+    <TextAreaComponent v-model:value="value" placeholder="Basic usage" />
   </div>
 </template>
 
