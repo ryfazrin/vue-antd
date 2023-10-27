@@ -43,18 +43,6 @@ watch(value, () => {
   console.log(value.value)
 })
 
-// Modal
-const openModal = ref<boolean>(false)
-
-const showModal = () => {
-  openModal.value = true
-};
-
-const handleOkModal = (e: MouseEvent) => {
-  console.log(e)
-  openModal.value = false
-}
-
 // Modal Delete
 const openModalDelete = ref<boolean>(false)
 
@@ -69,13 +57,7 @@ const onConfirmationDelete = (isConfirm: boolean) => {
 
 <template>
   <div style="padding: 10px;">
-    <a-button type="primary" @click="showModal">Open Modal</a-button>
-    <ModalComponent v-model:open="openModal" title="Basic Modal" @ok="handleOkModal">
-      <p>Some contents...</p>
-      <p>Some contents...</p>
-      <p>Some contents...</p>
-    </ModalComponent>
-
+    <p>Modal Confirmation delete</p>
     <a-button type="primary" @click="showModalDelete">Open Modal Delete</a-button>
     <ModalConfirmationDelete
       v-model:is-open="openModalDelete"
