@@ -3,6 +3,7 @@ import type { SelectProps } from 'ant-design-vue';
 import { watch, ref } from 'vue';
 import SelectComponent from '../components/SelectComponent.vue'
 import ModalComponent from '../components/ModalComponent.vue'
+import ModalConfirmationDelete from '../components/ModalConfirmationDelete.vue'
 import InputComponent from '../components/input/InputComponent.vue'
 import InputPasswordComponent from '../components/input/InputPasswordComponent.vue'
 import InputFileComponent from '../components/input/InputFileComponent.vue'
@@ -53,6 +54,17 @@ const handleOkModal = (e: MouseEvent) => {
   console.log(e)
   openModal.value = false
 }
+
+// Modal Delete
+const openModalDelete = ref<boolean>(false)
+
+const showModalDelete = () => {
+  openModalDelete.value = true
+}
+const onConfirmationDelete = (isConfirm: boolean) => {
+  console.log(isConfirm)
+  openModalDelete.value = false
+}
 </script>
 
 <template>
@@ -63,6 +75,12 @@ const handleOkModal = (e: MouseEvent) => {
       <p>Some contents...</p>
       <p>Some contents...</p>
     </ModalComponent>
+
+    <a-button type="primary" @click="showModalDelete">Open Modal Delete</a-button>
+    <ModalConfirmationDelete
+      v-model:is-open="openModalDelete"
+      @close="onConfirmationDelete"
+      title="Delete" />
 
     <SelectComponent
       ref="select"
