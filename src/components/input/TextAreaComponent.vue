@@ -27,7 +27,7 @@ const props = withDefaults(
   font-weight: v-bind('props.isBold ? `500` : `400`');
   min-height: v-bind('`${props.heightTa}px`') !important;
 
-  & :deep(textarea) {
+  & textarea {
     font-weight: v-bind('props.isBold ? `500` : `400`');
 
     &::placeholder {

@@ -4,6 +4,7 @@ import { watch, ref } from 'vue';
 import SelectComponent from '../components/SelectComponent.vue'
 import InputComponent from '../components/input/InputComponent.vue'
 import InputPasswordComponent from '../components/input/InputPasswordComponent.vue'
+import InputFileComponent from '../components/input/InputFileComponent.vue'
 import TextAreaComponent from '../components/input/TextAreaComponent.vue'
 import type { SelectValue } from 'ant-design-vue/es/select';
 
@@ -55,6 +56,8 @@ watch(value, () => {
       "
     ></SelectComponent>
 
+    <InputFileComponent ref="inputFile1" :disabled="false" :preview="true" />
+    <InputFileComponent ref="inputFile2" :disabled="false" :preview="false" />
     <InputComponent v-model:value="value" placeholder="Basic usage" />
     <InputPasswordComponent v-model:value="value" placeholder="Basic usage" />
     <TextAreaComponent v-model:value="value" placeholder="Basic usage" />

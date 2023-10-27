@@ -22,7 +22,7 @@ const props = withDefaults(
   padding-left: 16px;
   font-weight: v-bind('props.isBold ? `500` : `400`');
 
-  & :deep(input) {
+  & input {
     font-weight: v-bind('props.isBold ? `500` : `400`');
     position: relative;
     padding-left: 16px;
