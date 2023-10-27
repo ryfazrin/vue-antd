@@ -58,7 +58,7 @@ const theme = {
   <Button
 		v-bind="props"
 		:class="[$attrs.class, theme.customClass]"
-		:icon="theme.icon"
+		:icon="props.icon ? props.icon : theme.icon"
 		>
 		{{ props.typeButton === 'filter' ? 'Filter' : '' }}
 		<template v-if="typeButton !== 'filter'">

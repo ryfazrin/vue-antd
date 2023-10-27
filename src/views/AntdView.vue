@@ -2,7 +2,7 @@
 import type { SelectProps } from 'ant-design-vue';
 import { watch, ref } from 'vue';
 import SelectComponent from '../components/SelectComponent.vue'
-import ModalComponent from '../components/ModalComponent.vue'
+import ButtonAction from '../components/ButtonAction.vue'
 import ModalConfirmationDelete from '../components/ModalConfirmationDelete.vue'
 import InputComponent from '../components/input/InputComponent.vue'
 import InputPasswordComponent from '../components/input/InputPasswordComponent.vue'
@@ -57,6 +57,15 @@ const onConfirmationDelete = (isConfirm: boolean) => {
 
 <template>
   <div style="padding: 10px;">
+    <p>Button Action</p>
+    <ButtonAction
+      type-action="remove"
+      @delete="() => console.log('delete lagi')" />
+    
+    <ButtonAction
+      type-action="refresh"
+      @refresh="() => console.log('refresh lagi')" />
+
     <p>Modal Confirmation delete</p>
     <a-button type="primary" @click="showModalDelete">Open Modal Delete</a-button>
     <ModalConfirmationDelete
