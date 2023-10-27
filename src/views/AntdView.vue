@@ -2,6 +2,7 @@
 import type { SelectProps } from 'ant-design-vue';
 import { watch, ref } from 'vue';
 import SelectComponent from '../components/SelectComponent.vue'
+import ModalComponent from '../components/ModalComponent.vue'
 import InputComponent from '../components/input/InputComponent.vue'
 import InputPasswordComponent from '../components/input/InputPasswordComponent.vue'
 import InputFileComponent from '../components/input/InputFileComponent.vue'
@@ -40,10 +41,29 @@ const value = ref<string>('')
 watch(value, () => {
   console.log(value.value)
 })
+
+// Modal
+const openModal = ref<boolean>(false)
+
+const showModal = () => {
+  openModal.value = true
+};
+
+const handleOkModal = (e: MouseEvent) => {
+  console.log(e)
+  openModal.value = false
+}
 </script>
 
 <template>
   <div style="padding: 10px;">
+    <a-button type="primary" @click="showModal">Open Modal</a-button>
+    <ModalComponent v-model:open="openModal" title="Basic Modal" @ok="handleOkModal">
+      <p>Some contents...</p>
+      <p>Some contents...</p>
+      <p>Some contents...</p>
+    </ModalComponent>
+
     <SelectComponent
       ref="select"
       v-model:value="value1"
