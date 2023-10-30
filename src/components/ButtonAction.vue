@@ -7,8 +7,10 @@ import {
   ReloadOutlined,
   SettingOutlined
 } from '@ant-design/icons-vue'
-import { computed, h, ref } from 'vue'
+import { computed, h, ref, watch } from 'vue'
 import CustomButton from './CustomButton.vue'
+import { Space } from 'ant-design-vue'
+import ModalConfirmationDelete from './ModalConfirmationDelete.vue'
 
 type ButtonActionProps = {
   typeAction: 'display' | 'edit' | 'remove' | 'manage' | 'refresh'
@@ -26,7 +28,7 @@ const props = withDefaults(
   }
 )
 
-const TYPE_BUTTON_ACTION = computed(() => ({
+const TYPE_BUTTON_ACTION = {
   display: {
     0: h(EyeOutlined, { style: { color: COLORS.SECONDARY } }),
     1: h(EyeOutlined, { style: { color: COLORS.PRIMARY } }),
@@ -52,7 +54,7 @@ const TYPE_BUTTON_ACTION = computed(() => ({
     1: h(ReloadOutlined, { style: { color: COLORS.PRIMARY } }),
     title: 'change status'
   }
-}))
+}
 
 const hover = ref<0 | 1>(0)
 const openConfirmationDelete = ref<boolean>(false)
@@ -67,7 +69,7 @@ const onBlur = () => {
 }
 
 const onOpenConfirmationDelete = () => {
-  // console.log('delete')
+  console.log('open delete')
   openConfirmationDelete.value = true
 }
 
@@ -97,28 +99,61 @@ const handleButtonClick = () => {
     onOpenConfirmationRefresh()
   }
 }
+
+watch(
+  () => openConfirmationDelete.value,
+  (newValue: any) => {
+    console.log(openConfirmationDelete.value)
+
+    console.log('Nilai openConfirmationDelete berubah menjadi:', newValue)
+  }
+)
 </script>
 
 <template>
-  <CustomButton
-    v-bind="props"
-    @click="handleButtonClick"
-    :title="TYPE_BUTTON_ACTION[props.typeAction].title"
-    :icon="TYPE_BUTTON_ACTION[props.typeAction][hover]"
-    @pointerenter="onHover"
-    @pointerleave="onBlur"
-    typeButton="outline"
-  >
-    <template v-if="props.typeAction === 'manage' && !$slots.default">
-      Manage Permission
-    </template>
-    <template v-else>
-      <slot />
-    </template>
-  </CustomButton>
+  <div>
+    <CustomButton
+      v-bind="props"
+      @click="handleButtonClick"
+      typeButton="outline"
+      :title="TYPE_BUTTON_ACTION[props.typeAction].title"
+      :icon="TYPE_BUTTON_ACTION[props.typeAction][hover]"
+      @pointerenter="onHover"
+      @pointerleave="onBlur"
+    >
+      <template v-if="props.typeAction === 'manage' && !$slots.default">
+        Manage Permission
+      </template>
+      <template v-else>
+        <slot />
+      </template>
+    </CustomButton>
 
-  <!-- TODO Modal delete -->
-  <!-- TODO Modal refresh -->
+    <!-- TODO Modal delete -->
+    <ModalConfirmationDelete
+      v-model:is-open="openConfirmationDelete"
+      @close="onConfirmationDelete"
+      :title="TYPE_BUTTON_ACTION['remove']['1']"
+    />
+
+    
+    <!-- TODO Modal refresh -->
+    <ModalConfirmationDelete
+      v-model:is-open="openConfirmationRefresh"
+      type-modal="refresh"
+      @close="onConfirmationRefresh"
+      :title="TYPE_BUTTON_ACTION['refresh']['1']"
+    />
+    <!-- :title="
+        h(
+          Space,
+          {
+            size: 16
+          },
+          [TYPE_BUTTON_ACTION['remove']['1'], 'Delete / Change Status']
+        )
+      " -->
+  </div>
 </template>
 
 <style lang="scss" scoped></style>

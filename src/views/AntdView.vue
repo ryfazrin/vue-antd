@@ -9,6 +9,7 @@ import InputPasswordComponent from '../components/input/InputPasswordComponent.v
 import InputFileComponent from '../components/input/InputFileComponent.vue'
 import TextAreaComponent from '../components/input/TextAreaComponent.vue'
 import type { SelectValue } from 'ant-design-vue/es/select';
+import CustomButton from '@/components/CustomButton.vue';
 
 const value1 = ref('lucy')
 const options1 = ref<SelectProps['options']>([
@@ -67,11 +68,11 @@ const onConfirmationDelete = (isConfirm: boolean) => {
       @refresh="() => console.log('refresh lagi')" />
 
     <p>Modal Confirmation delete</p>
-    <a-button type="primary" @click="showModalDelete">Open Modal Delete</a-button>
+    <!-- <CustomButton type="primary" @click="showModalDelete">Open Modal Delete</CustomButton>
     <ModalConfirmationDelete
       v-model:is-open="openModalDelete"
       @close="onConfirmationDelete"
-      title="Delete" />
+      title="Delete" /> -->
 
     <SelectComponent
       ref="select"

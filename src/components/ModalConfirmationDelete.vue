@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { h, defineEmits } from 'vue'
+import { h } from 'vue'
 import ModalComponent from './ModalComponent.vue'
 import { Space } from 'ant-design-vue'
 import CustomButton from './CustomButton.vue'
