@@ -11,6 +11,7 @@ import TextAreaComponent from '../components/input/TextAreaComponent.vue'
 import type { SelectValue } from 'ant-design-vue/es/select';
 import CustomButton from '@/components/CustomButton.vue';
 import FilterStatusMain from '@/components/FilterStatusMain.vue';
+import ButtonInputComponent from '@/components/ButtonInputComponent.vue';
 
 const value1 = ref('lucy')
 const options1 = ref<SelectProps['options']>([
@@ -64,6 +65,11 @@ const onChangeStatus = (e: any) => {
 
 <template>
   <div style="padding: 10px;">
+    <p>Button Input Component</p>
+    <ButtonInputComponent 
+      placeholder="Search..."
+      @search="(e) => console.log(e)"
+    />
     <p>Button Action</p>
     <ButtonAction
       type-action="remove"
