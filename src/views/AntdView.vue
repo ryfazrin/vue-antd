@@ -10,6 +10,7 @@ import InputFileComponent from '../components/input/InputFileComponent.vue'
 import TextAreaComponent from '../components/input/TextAreaComponent.vue'
 import type { SelectValue } from 'ant-design-vue/es/select';
 import CustomButton from '@/components/CustomButton.vue';
+import FilterStatusMain from '@/components/FilterStatusMain.vue';
 
 const value1 = ref('lucy')
 const options1 = ref<SelectProps['options']>([
@@ -54,6 +55,11 @@ const onConfirmationDelete = (isConfirm: boolean) => {
   console.log(isConfirm)
   openModalDelete.value = false
 }
+
+// FilterStatusMain
+const onChangeStatus = (e: any) => {
+  console.log(e);
+}
 </script>
 
 <template>
@@ -66,6 +72,8 @@ const onConfirmationDelete = (isConfirm: boolean) => {
     <ButtonAction
       type-action="refresh"
       @refresh="() => console.log('refresh lagi')" />
+
+    <FilterStatusMain @change-status="onChangeStatus" />
 
     <p>Modal Confirmation delete</p>
     <!-- <CustomButton type="primary" @click="showModalDelete">Open Modal Delete</CustomButton>

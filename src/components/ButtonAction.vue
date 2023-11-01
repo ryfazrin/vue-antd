@@ -7,9 +7,8 @@ import {
   ReloadOutlined,
   SettingOutlined
 } from '@ant-design/icons-vue'
-import { computed, h, ref, watch } from 'vue'
+import { h, ref, watch } from 'vue'
 import CustomButton from './CustomButton.vue'
-import { Space } from 'ant-design-vue'
 import ModalConfirmationDelete from './ModalConfirmationDelete.vue'
 
 type ButtonActionProps = {
