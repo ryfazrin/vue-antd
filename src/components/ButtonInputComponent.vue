@@ -2,8 +2,9 @@
 import { SearchOutlined } from '@ant-design/icons-vue';
 import CustomButton from './CustomButton.vue';
 import InputComponent from './InputComponent.vue';
-import { h, ref, watch } from 'vue';
+import { h, onMounted, ref, watch } from 'vue';
 import { debounce } from '../utils/debounce';
+import { useRoute } from 'vue-router';
 
 interface ButtonInputComponentProps {
   onSearch: (e: any) => void
@@ -12,7 +13,8 @@ interface ButtonInputComponentProps {
 
 const props = defineProps<ButtonInputComponentProps>()
 
-// TODO router
+// TODO watch route
+const route = useRoute()
 
 const isFocusInput = ref(false)
 const inputValue = ref('')
@@ -42,12 +44,28 @@ const onChangeInput = debounce((e: any) => {
   } */
 })
 
-// TODO effects
 watch(isFocusInput, (newValue) => {
   if (newValue && inputRef.value?.current) {
     inputRef.value.current.focus();
   }
 })
+
+// TODO watch route effects
+
+// onMounted(() => {
+//   // if (route.isReady && route.query.search_param) {
+//   if (route && route.query) {
+//     isFocusInput.value = true;
+//     inputValue.value = String(route.query.search_param)
+//     props.onSearch({ target: { value: String(route.query.search_param) } })
+//   }
+// })
+// watch(route, (newRoute, oldRoute) => {
+//   if (newRoute.query.search_param !== oldRoute.query.search_param) {
+//     inputValue.value = String(newRoute.query.search_param)
+//     props.onSearch({ target: { value: String(newRoute.query.search_param) } })
+//   }
+// })
 </script>
 
 <template>
