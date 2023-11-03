@@ -6,7 +6,7 @@ import { h, onMounted, ref, watch } from 'vue';
 import { debounce } from '../utils/debounce';
 import { useRoute } from 'vue-router';
 
-interface ButtonInputComponentProps {
+export interface ButtonInputComponentProps {
   onSearch: (e: any) => void
 	placeholder: string
 }

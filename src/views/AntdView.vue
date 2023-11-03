@@ -6,6 +6,7 @@ import ButtonAction from '../components/ButtonAction.vue'
 import ModalConfirmationDelete from '../components/ModalConfirmationDelete.vue'
 import InputComponent from '../components/input/InputComponent.vue'
 import CustomContainerActionChange from '../components/organisms/CustomContainerActionChange.vue'
+import MainTitlePage from '../components/organisms/MainTitlePage.vue'
 import InputPasswordComponent from '../components/input/InputPasswordComponent.vue'
 import InputFileComponent from '../components/input/InputFileComponent.vue'
 import TextAreaComponent from '../components/input/TextAreaComponent.vue'
@@ -124,6 +125,20 @@ const onReset = () => console.log('reset')
 <template>
   <div style="padding: 10px;">
     <!-- :addLoading="isLoadingCreate || isLoadingEdit" -->
+    <MainTitlePage
+      :type-title="1"
+      :title1="{
+        description: 'Kamu bisa menambahkan data user dengan cara klik tambah',
+      }"
+      :search="{
+        onSearch: () => console.log('onSearch'),
+        // placeholder: 'Search Product Code, Product Name, Product Status',
+        placeholder: 'Search User name',
+      }"
+      :filter-status="() => console.log('setStatus state')"
+      :add="() => console.log('showModal()')"
+      add-title="New User"
+    />
     <CustomContainerActionChange
       text="Kamu bisa menambahkan data disini dengan mengklik save."
       addText="Save"
