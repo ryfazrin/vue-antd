@@ -5,6 +5,7 @@ import SelectComponent from '../components/SelectComponent.vue'
 import ButtonAction from '../components/ButtonAction.vue'
 import ModalConfirmationDelete from '../components/ModalConfirmationDelete.vue'
 import InputComponent from '../components/input/InputComponent.vue'
+import CustomContainerActionChange from '../components/organisms/CustomContainerActionChange.vue'
 import InputPasswordComponent from '../components/input/InputPasswordComponent.vue'
 import InputFileComponent from '../components/input/InputFileComponent.vue'
 import TextAreaComponent from '../components/input/TextAreaComponent.vue'
@@ -114,10 +115,24 @@ const data = [
     tags: ['cool', 'teacher'],
   },
 ];
+
+// CustomContainerActionChange
+const onSubmit = () => console.log('submit')
+const onReset = () => console.log('reset')
 </script>
 
 <template>
   <div style="padding: 10px;">
+    <!-- :addLoading="isLoadingCreate || isLoadingEdit" -->
+    <CustomContainerActionChange
+      text="Kamu bisa menambahkan data disini dengan mengklik save."
+      addText="Save"
+      :addIcon="false"
+      :addLoading="false"
+      resetText="Cancel"
+      @add="onSubmit"
+      @reset="onReset"
+    />
     <p>Custom Table</p>
     <CustomTable
       :columns="columns"
